@@ -22,13 +22,19 @@ def load_documents(data_path: str) -> List[Dict]:
     return documents
 
 def clean_text(text: str) -> str:
-
+    """
+    Basic cleaning:
+    - remove extra spaces
+    - normalize newlines
+    """
     text = re.sub(r'\n+', '\n', text)
     text = re.sub(r'\s+', ' ', text)
     return text.strip()
 
 def chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> List[str]:
-
+    """
+    Splits text into overlapping chunks
+    """
     chunks = []
     start = 0
     text_length = len(text)
@@ -45,7 +51,9 @@ def chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> List[str]
 def chunk_documents(documents: List[Dict], 
                     chunk_size: int = 500, 
                     overlap: int = 50) -> List[Dict]:
-
+    """
+    Chunks each document and attaches metadata
+    """
     all_chunks = []
 
     for doc in documents:
@@ -71,5 +79,3 @@ if __name__ == "__main__":
 
     print("\nExample Chunk:\n")
     print(chunks[0])
-
-
